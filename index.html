@@ -45,6 +45,7 @@ body{background:#08080a;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Dis
 .panel-h{display:flex;align-items:center;justify-content:space-between;padding:10px 10px 6px}
 .panel-h b{font-size:16px;letter-spacing:-.3px}
 .panel-h button{border:0;background:rgba(120,120,128,.16);color:var(--text);font-size:13px;font-weight:700;border-radius:999px;padding:7px 13px;cursor:pointer}
+.panel-btns{display:flex;gap:8px}
 .rowline{display:flex;align-items:center;gap:12px;padding:11px 10px;border-top:1px solid rgba(120,120,128,.16)}
 .rowline:first-of-type{border-top:0}
 .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c8c4ef,#b9e7aa);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#1d1d1f;flex-shrink:0}
@@ -56,12 +57,7 @@ body{background:#08080a;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Dis
 .amt.out{color:var(--text)}
 .del{border:0;background:none;color:#ff5a5a;font-size:16px;cursor:pointer;padding:4px}
 .empty{text-align:center;font-size:13px;color:var(--sub);padding:16px 10px}
-.scroll-end{height:8px}
-.dockwrap{padding:10px 16px calc(14px + env(safe-area-inset-bottom))}
-.dock{background:rgba(28,28,30,.85);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:22px;display:flex;gap:8px;padding:8px}
-.dock button{flex:1;border:0;border-radius:15px;padding:13px;font-size:14px;font-weight:600;cursor:pointer}
-.d-main{background:#fff;color:#000}
-.d-sec{background:rgba(255,255,255,.14);color:#fff}
+.scroll-end{height:12px}
 .sheet{position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;z-index:20}
 .sheet.show{display:flex}
 .sbox{background:rgba(24,24,30,.96);backdrop-filter:blur(30px);color:#fff;width:100%;border-radius:26px 26px 0 0;padding:20px 18px 36px;max-height:92%;overflow-y:auto}
@@ -110,6 +106,8 @@ body{background:#08080a;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Dis
 <div class="toolbar-right">
 <button class="gbtn pill-btn theme-sw" id="btnTheme"><span class="theme-knob" id="themeKnob">☀</span></button>
 <button class="gbtn pill-btn info-btn" id="demoBtn">i</button>
+<button class="gbtn pill-btn info-btn" id="btnEdit" title="Balance ändern"><svg width="16" height="16" viewBox="0 0 20 20"><path d="M13.5 3.5l3 3L8 15l-4 1 1-4 8.5-8.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button>
+<button class="gbtn pill-btn info-btn" id="btnCard" title="Kartenbild"><svg width="17" height="17" viewBox="0 0 20 20"><rect x="2" y="3.5" width="16" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="8" r="1.4" fill="currentColor"/><path d="M3.5 15l4-4 3 3 2.5-2.5 3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
 <button class="gbtn pill-btn" id="btnSearch">⌕</button>
 </div>
 </div>
@@ -126,14 +124,9 @@ body{background:#08080a;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Dis
 <div class="tile"><h4>Card Balance</h4><div class="big" id="vBalance">$1,682.55</div><div class="sub" id="vAvail">$8,317.45 Available</div></div>
 <div class="tile"><h4>Total In</h4><div class="big pos" id="vIn">+$0.00</div><div class="sub" id="vCount">0 entries</div></div>
 </div>
-<div class="panel"><div class="panel-h"><b>Activity</b><button id="btnAdd">+ Add</button></div><div id="list"></div></div>
+<div class="panel"><div class="panel-h"><b>Activity</b><div class="panel-btns"><button id="btnRandom" title="Zufallswerte">↻</button><button id="btnAdd">+ Add</button></div></div><div id="list"></div></div>
 <div class="scroll-end"></div>
 </div>
-<div class="dockwrap"><div class="dock">
-<button class="d-sec" id="btnCard" title="Card image"><svg width="19" height="19" viewBox="0 0 20 20"><rect x="2" y="3.5" width="16" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="8" r="1.4" fill="currentColor"/><path d="M3.5 15l4-4 3 3 2.5-2.5 3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
-<button class="d-sec" id="btnEdit" title="Edit balance"><svg width="19" height="19" viewBox="0 0 20 20"><path d="M13.5 3.5l3 3L8 15l-4 1 1-4 8.5-8.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></button>
-<button class="d-sec" id="btnRandom" title="Randomize"><svg width="19" height="19" viewBox="0 0 20 20"><path d="M3.5 7a8 8 0 0 1 13.4-2.5M16.5 13a8 8 0 0 1-13.4 2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M16.9 2v3h-3M3.1 18v-3h3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-</div></div>
 <div class="toast" id="toast"></div>
 <div class="popup" id="demoPopup"><div class="popup-card"><h3>Demo Prop</h3><p>Fictional wallet for LARP / film / mockups.</p><p>All balances and income entries are fake, stored only on this device. Not real money.</p><button id="demoOk">OK</button><button class="ghost" id="demoEdit">Edit values</button></div></div>
 <div class="sheet" id="sheet"><div class="sbox">
